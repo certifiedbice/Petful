@@ -1,4 +1,4 @@
-const {people,dogs,cats}=require('./store');
+const {people,dogs,cats}=require('../store');
 
 function seedPeople(db,people){
 	// use a transaction to group the queries and auto rollback on any failure
@@ -42,9 +42,41 @@ function seedCats(db){
 }
 
 function makeFixtures(){
-const testPeople = makeUsersArray()
+	// const testPeople = makeUsersArray()
 	const testPeople = people
-	const testDogs = dogs
-	const testDogs = cats
-	return { testPeople, testDogs, testCats }
+	// const testDogs = dogs
+	// const testDogs = cats
+	return { testPeople/*, testDogs, testCats */}
+}
+
+function cleanTables(db){
+	return db.transaction(trx =>
+		trx.raw(
+			`TRUNCATE
+				people,
+				dogs,
+				cats
+			`
+		)
+		.then(() =>
+			Promise.all([
+				trx.raw(`ALTER SEQUENCE people_id_seq minvalue 0 START WITH 1`),
+				trx.raw(`ALTER SEQUENCE dogs_id_seq minvalue 0 START WITH 1`),
+				trx.raw(`ALTER SEQUENCE cats_id_seq minvalue 0 START WITH 1`),
+				trx.raw(`SELECT setval('people_id_seq', 0)`),
+				trx.raw(`SELECT setval('dogs_id_seq', 0)`),
+				trx.raw(`SELECT setval('cats_id_seq', 0)`),
+			])
+		)
+	)
+}
+
+
+module.exports={
+	seedPeople,
+	makeExpectedPerson,
+	seedDogs,
+	seedCats,
+	makeFixtures,
+	cleanTables,
 }
