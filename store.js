@@ -227,4 +227,4 @@ module.exports = {
       story: 'Found in neighborhood'
     }
   ]
-}
+};
