@@ -1,0 +1,11 @@
+footer{
+	position: fixed;
+	bottom: 0;
+	height: 200px;
+	width: 100%;
+	background-image: url('../../images/petful-footer-image.png');
+	background-size: 50%;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	z-index: 99;
+}

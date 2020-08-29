@@ -1,7 +1,18 @@
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import * as serviceWorker from './serviceWorker';
+import {PetfulProvider} from './context/petfulcontext';
+import App from './components/app/app';
+import './index.css';
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Root from './root/Root'
+ReactDOM.render(
+	<BrowserRouter>
+		<PetfulProvider>
+			<App />
+		</PetfulProvider>
+	</BrowserRouter>,
+	document.getElementById('root')
+);
 
-ReactDOM.render(<Root />, document.getElementById('root'))
+serviceWorker.unregister();
