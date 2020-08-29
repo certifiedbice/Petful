@@ -1,0 +1,35 @@
+#registration-form-full-name{
+	width: 100%;
+	min-height: 35px;
+	border-radius: 15px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: 'Fredoka One', cursive;
+	font-size: 5.5vw;
+	color:#4f4130;
+}
+
+#registration-form-full-name:hover{
+	background-color:#d1d1d1;
+	color:#4f4130;
+}
+
+#registration-form-submit{
+	margin: 10px 0 0 0;
+	width: 100%;
+	min-height: 35px;
+	border-radius: 15px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: 'Fredoka One', cursive;
+	font-size: 5.5vw;
+	color:#4f4130;
+}
+
+#registration-form-submit:hover{
+	background-color:#4f4130;
+	color:#fff;
+}
+
+#registration-form-full-name:focus{
+	background-color: #d1d1d1;
+	outline: none;
+}

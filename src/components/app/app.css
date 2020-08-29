@@ -1,6 +1,58 @@
 body{
+	margin: 0 0 200px 0;
+	padding: 0;
 	background-color:#d1d1d1;
 	background-image: url('../../images/paw-print-tile.png');
 	background-position: top left;
+	background-attachment: fixed;
 	background-repeat: no-repeat;
+	color:#4f4130;
+}
+
+#root{
+	margin: 0;
+	width: 100%;
+	padding: 0;
+}
+
+#app{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 0 10px 0 10px;
+}
+
+main{
+	flex: 1;
+ 	margin: 15% auto 0 auto;
+	width: 100%;
+}
+
+section{
+	text-align: center;
+}
+
+.section-element{
+	margin: 20px 0 0 0;
+	background-color: #fff;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+.section-element p{
+	margin: 0 0 5px 0;
+}
+
+.section-element h2{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: 'Fredoka One', cursive;
+}
+
+/* Desktop CSS */
+
+@media only screen and (min-width:500px){
+    main{
+		width: 70%;
+	}
 }

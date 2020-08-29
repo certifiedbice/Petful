@@ -1,17 +1,17 @@
 header{
 	position: fixed;
+	top: 0;
+	left: 0;
 	height: 20%;
 	width: 100%;
 	text-align: center;
 }
 
 header, header h1, header h1 a{
-	/* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-family: 'Fredoka One', cursive;
 	font-size: 5.5vw;
 	font-weight: 700;
-	/* color:#fff; */
 	color:#4f4130;
 	text-decoration: none;
-	/* text-shadow: 2px 2px 2px #4f4130; */
 }
