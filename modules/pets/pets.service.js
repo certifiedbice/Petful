@@ -33,7 +33,7 @@ module.exports = {
   },
 
   getAllCats() {
-    return pets.cats.all();
+	return pets.cats.all();
   },
 
   dequeue(type) {

@@ -8,8 +8,8 @@ const app=express();
 app.use(morgan((NODE_ENV==='production')?'tiny':'common',{skip:()=>NODE_ENV==='test'}));
 app.use(cors());
 app.use(helmet());
-app.use('/people', require('../people/people.router'))
-app.use('/pets', require('../pets/pets.router'))
+app.use('/api/people', require('../people/people.router'))
+app.use('/api/', require('../pets/pets.router'))
 app.use(function errorHandler(error,req,res,next){
   	let response;
   	if(NODE_ENV==='production'){response={error:'Server error'}}
