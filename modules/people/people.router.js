@@ -29,4 +29,14 @@ router.post('/', json, (req, res) => {
 	}
 })
 
+router.delete('/', (req, res) => {
+	try{
+		People.dequeue();
+		res.status(200).send('Person dequeued');
+	}
+	catch(error){
+		res.status(406).json({error:'message'});
+	}
+})
+
 module.exports = router
