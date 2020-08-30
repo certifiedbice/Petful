@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import Context from '../../context/petfulcontext';
 import PetfulApiService from '../../services/petful-api-service';
 import './registrationform.css';
@@ -6,8 +7,19 @@ import './registrationform.css';
 export default class RegistrationForm extends Component {
 	static contextType=Context;
 
+	state = {
+		shouldRedirect: false
+	}
+
+	renderRedirect=()=>{
+		return(
+			<Redirect to="/adoptions" />
+		)
+	}
+
 	onRegistrationSuccess=()=>{
 		console.log('Success')
+		this.setState({shouldRedirect: true})
 	}
 
 	componentDidMount() {
@@ -34,6 +46,7 @@ export default class RegistrationForm extends Component {
 		const {error}=this.context;
 		return(
 			<div>
+				{this.state.shouldRedirect && this.renderRedirect()}
 				<form id='registration-form' name='registration-form' onSubmit={this.handleSubmit}>
 					<div>
 						<label htmlFor='registration-form-full-name'><h2>Full name required</h2></label>
