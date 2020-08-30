@@ -20,7 +20,7 @@ router.post('/', json, (req, res) => {
 	// Add a new person to the queue.
 	try{
 		console.log(req.body)
-		const newPerson=People.enqueue(req.body);
+		const newPerson=People.enqueue(req.body.full_name);
 		console.log(newPerson)
   		res.status(201).json(newPerson);
   	}
