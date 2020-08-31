@@ -1,5 +1,7 @@
 import React, {useContext} from 'react';
 import Context from '../../context/petfulcontext';
+import PetfulApiService from '../../services/petful-api-service';
+import './pet.css';
 
 export default function Pet(props) {
   const context = useContext(Context);
@@ -13,7 +15,14 @@ export default function Pet(props) {
   const story = props.pet.story;
 
   const handleButtonClick = () => {
-
+    if(props.type === 'Cat') {
+      PetfulApiService.deleteCat();
+    }
+    if(props.type === 'Dog') {
+      PetfulApiService.deleteDog();
+    }
+    context.setIsInLine(false);
+    window.alert("Congrats! You've adopted this pet!");
   }
 
   return (

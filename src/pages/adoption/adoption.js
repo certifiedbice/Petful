@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import Context from '../../context/petfulcontext';
 import './adoption.css';
 import PetfulApiService from '../../services/petful-api-service';
@@ -17,6 +16,7 @@ export default class AdoptionPage extends Component {
         clearInterval();
       }      
       PetfulApiService.deleteUser();
+      PetfulApiService.postRandomUser();
     },5000)
   }
 
