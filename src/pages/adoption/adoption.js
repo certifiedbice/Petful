@@ -8,23 +8,20 @@ import Pet from '../../components/pet/pet';
 export default class AdoptionPage extends Component {
   static contextType=Context;
 
-  state = {
-    cats:[],
-    dogs:[]
+  handleGetInLineButtonClick = () => {
+    const user = this.context.user;
+    this.context.addPerson(user);
+    this.context.setIsInLine(true);
+    setInterval(()=>{
+      if(this.context.user === this.context.people[0]) {
+        clearInterval();
+      }      
+      PetfulApiService.deleteUser();
+    },5000)
   }
 
 	componentDidMount() {
     this.context.clearError();
-    this.setState({
-      cats: PetfulApiService.getCats(),
-      dogs: PetfulApiService.getDogs()
-    })
-	}
-	
-	pictureToDisplay=()=>{
-		let randomeNumber=Math.floor((Math.random()*2)+1);
-		if(randomeNumber===1){return this.context.landingPicture1;}
-		else{return this.context.landingPicture2;}
 	}
   	
 	render(){
@@ -33,32 +30,23 @@ export default class AdoptionPage extends Component {
 			<section id='adoption-section'>
         <h2>Adoption Page</h2>
 
+        <h3>List of people in line</h3>
+        {this.context.people.forEach(person => {
+          return (
+            <div>{person}</div>
+          )
+        })}
+
+        {!this.context.isInLine &&
+          <button onclick={this.handleGetInLineButtonClick}>Get in line</button>
+        }
+
         <h3>Here are the pets for adoption</h3>
 
-        <Pet type="Cat" pet={this.state.cats[0]}/>
+        <Pet type="Cat" pet={this.context.cats[0]}/>
 
-        <Pet type="Dog" pet={this.state.dogs[0]}/>
+        <Pet type="Dog" pet={this.context.dogs[0]}/>
 
-				{/* <div className='section-element' id='landing-picture'>
-					<img src={this.pictureToDisplay()} alt='Adopt a pet'/>
-				</div>
-				<div className='section-element' id='landing-description'>
-					<p>
-						Welcome to the Petful FIFO Adoption Service.
-						Sign up today, we have someone we would like you to meet. 
-					</p>
-					<h2>How it works</h2>
-					<ol>
-						<li>Sign up.</li>
-						<li>You are placed onto our waitlist.</li>
-						<li>Your name reaches the top of the list.</li>
-						<li>You adopt the pet at the top of the list.</li>
-						<li>You and your new best friend live happily ever after.</li>
-					</ol>
-				</div>
-				<div className='section-element' id='landing-button'>
-					<h2><Link to='/registration'>Sign Up</Link></h2>
-				</div> */}
 			</section>
 		);
 	}

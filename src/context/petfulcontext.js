@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 
 const PetfulContext=React.createContext({
+	user:null,
 	people:null,
 	dogs:null,
 	cats:null,
@@ -19,19 +20,29 @@ export default PetfulContext;
 
 export class PetfulProvider extends Component {
 	state={
+		user:'',
+		isInLine: false,
 		people:[],
 		dogs:[],
 		cats:[],
 		landingPicture1:null,
 		landingPicture2:null,
 		error:null,
-	};
+	}
+
+	setUser=user=>{
+		this.setState({user:user})
+	}
+
+	setIsInLine=value=>{
+		this.setState({isInLine:value})
+	}
 
 	setPeople=people=>{
 		this.setState({people:people})
 	}
 
-	setPerson=person=>{
+	addPerson=person=>{
 		this.setState({people:[...this.state.people,person]})
 	}
 

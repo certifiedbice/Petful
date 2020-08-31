@@ -40,6 +40,11 @@ const PetfulApiService={
 				? res.json().then(e=>Promise.reject(e))
 				: res.json()
 		);
+	},
+	deleteUser(){
+		return fetch(`${config.API_ENDPOINT}/people`,{
+			method:'DELETE'
+		})
 	}
 }
 

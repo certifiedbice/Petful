@@ -29,14 +29,14 @@ export default class RegistrationForm extends Component {
   	handleSubmit=e=>{
 		e.preventDefault();
 		const {full_name}=e.target;
-		this.setState({error:null});
+		// this.setState({error:null});
 	    PetfulApiService.postUser({
 		 	full_name:full_name.value,
 		})
 		.then(user=>{
 			console.log(user)
 			full_name.value='';
-			this.context.setPerson(user);
+			this.context.setUser(user);
 			this.onRegistrationSuccess();
   		})
 		.catch(res=>{this.setState({error:res.error});});
