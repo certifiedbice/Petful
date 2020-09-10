@@ -22,22 +22,20 @@ router.get('/', (req, res) => {
 router.get('/cat', (req, res) => {
   try {
     const cats = Pets.getAllCats();
-	console.log(cats)
-    res.status(200).json(cats);
+	res.status(200).json(cats);
   }
   catch {
-		// res.status(406).json({error:message});
+		res.status(406).json({error:'message'});
   }
 })
 
 router.get('/dog', (req, res) => {
   try {
     const dogs = Pets.getAllDogs();
-	console.log(dogs)
-    res.status(200).json(dogs);
+	res.status(200).json(dogs);
   }
   catch {
-		// res.status(406).json({error:message});
+		res.status(406).json({error:'message'});
   }
 })
 
