@@ -1,4 +1,4 @@
-#registration-form-full-name{
+#registration-form-name{
 	width: 100%;
 	min-height: 35px;
 	border-radius: 15px;
@@ -8,7 +8,7 @@
 	color:#4f4130;
 }
 
-#registration-form-full-name:hover{
+#registration-form-name:hover{
 	background-color:#d1d1d1;
 	color:#4f4130;
 }

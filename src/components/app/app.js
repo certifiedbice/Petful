@@ -6,23 +6,28 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import AdoptionPage from '../../pages/adoption/adoption';
 import LandingPage from '../../pages/landing/landing';
-import RegistrationPage from '../../pages/registration/registration';
+
 import './app.css';
 
 class App extends Component{
 	static contextType=Context;
 
-	componentDidMount(){
+	async componentDidMount(){
 		this.context.clearError();
-		PetfulApiService.getPeople().then(data=>this.context.setPeople(data));
-		PetfulApiService.getDogs().then(data=>{
-			this.context.setDogs(data);
-			this.context.setLandingPicture(1,data[0].imageURL);
-		});
-		PetfulApiService.getCats().then(data=>{
-			this.context.setCats(data);
-			this.context.setLandingPicture(2,data[0].imageURL);
-		});
+		if(this.context.init===false){
+			const peopleList= await PetfulApiService.getPeople();
+				this.context.setPeople(peopleList)
+
+			const dogList= await PetfulApiService.getDogs();
+				this.context.setDogs(dogList);
+				this.context.setLandingPicture(1,dogList[0].imageURL);
+
+			const catList= await PetfulApiService.getCats();
+				this.context.setCats(catList);
+				this.context.setLandingPicture(2,catList[0].imageURL);
+
+			this.context.setInit(true);
+		}
 	}
 
 	render(){
@@ -32,11 +37,11 @@ class App extends Component{
 				<Header/>
 				<main id='main'>
 					<Switch>
-						<Route exact path={'/adoptions'} component={AdoptionPage}/>
+						<Route exact path={'/adoption'} component={AdoptionPage}/>
 						<Route exact path={'/'} component={LandingPage}/>
 						<Route exact path={'/home'} component={LandingPage}/>
 						<Route exact path={'/landing'} component={LandingPage}/>
-						<Route exact path={'/registration'} component={RegistrationPage}/>
+						{/* <Route exact path={'/registration'} component={RegistrationPage}/> */}
 					</Switch>
 				</main>
 				<Footer/>

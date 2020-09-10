@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 
 const PetfulContext=React.createContext({
+	init:false,
 	user:null,
 	people:null,
 	isInLine:false,
@@ -11,19 +12,23 @@ const PetfulContext=React.createContext({
 	error:null,
 	setError:()=>{},
 	clearError:()=>{},
-	setUser:()=>{},
-	setIsInLine:()=>{},
+	setInit:()=>{},
 	setPeople:()=>{},
-	addPerson:()=>{},
+	setUser:()=>{},
+	addUserToQueue:()=>{},
+	deleteUserFromQueue:()=>{},
 	setDogs:()=>{},
+	deleteDog:()=>{},
 	setCats:()=>{},
+	deleteCat:()=>{},
 	setLandingPicture:()=>{},
 });
 export default PetfulContext;
 
 export class PetfulProvider extends Component {
 	state={
-		user:'',
+		init:false,
+		user:null,
 		isInLine: false,
 		people:[],
 		dogs:[],
@@ -33,28 +38,36 @@ export class PetfulProvider extends Component {
 		error:null,
 	}
 
-	setUser=user=>{
-		this.setState({user:user})
+	addUserToQueue=user=>{
+		this.setState({people:[...this.state.people,user]})
 	}
 
-	setIsInLine=value=>{
-		this.setState({isInLine:value})
+	deleteUserFromQueue=user=>{
+		let tmpArray=[...this.state.people];
+		tmpArray.shift();
+		this.setState({people:[...tmpArray]})
 	}
 
-	setPeople=people=>{
-		this.setState({people:people})
-	}
+	setInit=init=>{this.setState({init:init})}
+	
+	setUser=user=>{this.setState({user:user.name})}
 
-	addPerson=person=>{
-		this.setState({people:[...this.state.people,person]})
-	}
+	setPeople=people=>{this.setState({people:people})}
 
-	setDogs=dogs=>{
-		this.setState({dogs:dogs.dogs})
-	}
+	setDogs=dogs=>{this.setState({dogs:dogs})}
 
-	setCats=cats=>{
-		this.setState({cats:cats.cats})
+	deleteDog=dog=>{
+		let tmpArray=[...this.state.dogs];
+		tmpArray.shift();
+		this.setState({dogs:[...tmpArray]})
+	}
+	
+	setCats=cats=>{this.setState({cats:cats})}
+
+	deleteCat=cat=>{
+		let tmpArray=[...this.state.cats];
+		tmpArray.shift();
+		this.setState({cats:[...tmpArray]})
 	}
 
 	setLandingPicture=(num,imageURL)=>{
@@ -73,6 +86,8 @@ export class PetfulProvider extends Component {
 
 	render(){
 		const value={
+			init:this.state.init,
+			user:this.state.user,
 			people:this.state.people,
 			dogs:this.state.dogs,
 			cats:this.state.cats,
@@ -81,10 +96,15 @@ export class PetfulProvider extends Component {
 			error:this.state.error,
 			setError:this.setError,
 			clearError:this.clearError,
+			setInit:this.setInit,
 			setPeople:this.setPeople,
-			setPerson:this.setPerson,
+			setUser:this.setUser,
+			addUserToQueue:this.addUserToQueue,
+			deleteUserFromQueue:this.deleteUserFromQueue,
 			setDogs:this.setDogs,
+			deleteDog:this.deleteDog,
 			setCats:this.setCats,
+			deleteCat:this.deleteCat,
 			setLandingPicture:this.setLandingPicture,
 		};
 		return(

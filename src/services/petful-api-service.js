@@ -45,7 +45,7 @@ const PetfulApiService={
 		return fetch(`${config.API_ENDPOINT}/people`,{
 			method:'POST',
 			headers:{'content-type':'application/json'},
-			body:JSON.stringify({full_name:user.full_name}),
+			body:JSON.stringify({name:user.name}),
 		})
 		.then(res=>
 			(!res.ok)
@@ -53,23 +53,25 @@ const PetfulApiService={
 				: res.json()
 		);
 	},
-	postRandomUser(){
-		const randomUser = peopleStore[Math.floor(Math.random(peopleStore.length()))];
-		return fetch(`${config.API_ENDPOINT}/people`,{
-			method:'POST',
-			headers:{'content-type':'application/json'},
-			body:JSON.stringify({full_name:randomUser})
-		})
-		.then(res=>
-			(!res.ok)
-				? res.json().then(e=>Promise.reject(e))
-				: res.json()			
-		);
-	},
-	deleteUser(){
+	// postRandomUser(){
+	// 	const randomUser = peopleStore[Math.floor(Math.random(peopleStore.length()))];
+	// 	return fetch(`${config.API_ENDPOINT}/people`,{
+	// 		method:'POST',
+	// 		headers:{'content-type':'application/json'},
+	// 		body:JSON.stringify({full_name:randomUser})
+	// 	})
+	// 	.then(res=>
+	// 		(!res.ok)
+	// 			? res.json().then(e=>Promise.reject(e))
+	// 			: res.json()			
+	// 	);
+	// },
+	deleteUser(user){
 		// dequeue first user in queue
 		return fetch(`${config.API_ENDPOINT}/people`,{
-			method:'DELETE'
+			method:'DELETE',
+            'headers': {'Content-Type': 'application/json'},
+            'body': JSON.stringify({name:user})
 		})
 	},
 	deleteCat(){

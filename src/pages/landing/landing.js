@@ -37,6 +37,11 @@ export default class LandingPage extends Component {
 						<li>You and your new best friend live happily ever after.</li>
 					</ol>
 				</div>
+				
+				<div className='section-element' id='adoption-button'>
+					<h2><Link to='/adoption'>Adoption</Link></h2>
+				</div>
+
 				<div className='section-element' id='landing-button'>
 					<h2><Link to='/registration'>Sign Up</Link></h2>
 				</div>
