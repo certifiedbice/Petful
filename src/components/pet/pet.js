@@ -53,7 +53,7 @@ export default class Pet extends Component{
 				<div><span>{name}'s story: </span><span>{story}</span></div>
 				{
 					this.context.user===this.context.people[0]
-						? <AdoptionButton/>
+						? <AdoptionButton type={this.props.type}/>
 						: <></>
 				}
 			</>
