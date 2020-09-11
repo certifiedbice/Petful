@@ -42,7 +42,7 @@ router.get('/dog', (req, res) => {
 router.delete('/cat', json, (req, res) => {
   // Remove a pet from adoption.
   try {
-    const cat = Pets.dequeue('cat');
+	const cat = Pets.dequeue('cat');
     res.status(200).json(cat);
   }
   catch {
