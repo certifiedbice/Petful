@@ -41,7 +41,6 @@ class App extends Component{
 						<Route exact path={'/'} component={LandingPage}/>
 						<Route exact path={'/home'} component={LandingPage}/>
 						<Route exact path={'/landing'} component={LandingPage}/>
-						{/* <Route exact path={'/registration'} component={RegistrationPage}/> */}
 					</Switch>
 				</main>
 				<Footer/>

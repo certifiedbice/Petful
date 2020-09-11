@@ -1,10 +1,11 @@
 import React,{Component} from 'react';
+import PetfulApiService from '../services/petful-api-service';
 
 const PetfulContext=React.createContext({
 	init:false,
+	queueIntervalState:null,
 	user:null,
 	people:null,
-	isInLine:false,
 	dogs:null,
 	cats:null,
 	landingPicture1:null,
@@ -12,6 +13,7 @@ const PetfulContext=React.createContext({
 	error:null,
 	setError:()=>{},
 	clearError:()=>{},
+	queueInterval:()=>{},
 	setInit:()=>{},
 	setPeople:()=>{},
 	setUser:()=>{},
@@ -29,7 +31,7 @@ export class PetfulProvider extends Component {
 	state={
 		init:false,
 		user:null,
-		isInLine: false,
+		queueIntervalState:null,
 		people:[],
 		dogs:[],
 		cats:[],
@@ -46,6 +48,27 @@ export class PetfulProvider extends Component {
 		let tmpArray=[...this.state.people];
 		tmpArray.shift();
 		this.setState({people:[...tmpArray]})
+	}
+
+	updateQueue=()=>{
+		//store the user at the front of queue in a variable
+		let user=this.state.people[0];
+		//send the delete request to the api
+		PetfulApiService.deleteUser(user);
+		//send the post request to the api with the stored user
+		PetfulApiService.postUser({name:user});
+		//update context/state?
+		this.deleteUserFromQueue(user);
+		this.addUserToQueue(user);
+		//delete the head of the list either dog or cat, chosen at random
+		const petToDelete=Math.floor(Math.random()*2);
+		if(petToDelete===0){this.deleteDog();}
+		else{this.deleteCat();}
+	}
+
+	queueInterval=()=>{
+		let interval=setInterval(this.updateQueue,15000)
+		this.setState({queueIntervalState:interval})
 	}
 
 	setInit=init=>{this.setState({init:init})}
@@ -87,6 +110,7 @@ export class PetfulProvider extends Component {
 	render(){
 		const value={
 			init:this.state.init,
+			queueIntervalState:this.state.queueIntervalState,
 			user:this.state.user,
 			people:this.state.people,
 			dogs:this.state.dogs,
@@ -96,6 +120,7 @@ export class PetfulProvider extends Component {
 			error:this.state.error,
 			setError:this.setError,
 			clearError:this.clearError,
+			queueInterval:this.queueInterval,
 			setInit:this.setInit,
 			setPeople:this.setPeople,
 			setUser:this.setUser,

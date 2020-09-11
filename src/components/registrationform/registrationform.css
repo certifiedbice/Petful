@@ -22,6 +22,7 @@
 	font-family: 'Fredoka One', cursive;
 	font-size: 5.5vw;
 	color:#4f4130;
+	cursor:pointer;
 }
 
 #registration-form-submit:hover{

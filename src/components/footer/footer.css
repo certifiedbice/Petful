@@ -1,10 +1,11 @@
 footer{
 	position: fixed;
 	bottom: 0;
-	height: 50px;
-	width: 100%;
+	right: 0px;
+	height: 200px;
+	width: 50%;
 	background-image: url('../../images/petful-footer-image.png');
-	background-size: 50%;
+	background-size: 100%;
 	background-position: bottom right;
 	background-repeat: no-repeat;
 	z-index: 99;
@@ -15,13 +16,7 @@ footer{
 @media only screen and (min-width:500px){
     footer{
 		height: 200px;
-		background-size: 50%;
-	}
-}
-
-@media only screen and (min-width:801px){
-    footer{
-		height: 200px;
-		background-size: 25%;
+		width: 25%;
+		
 	}
 }

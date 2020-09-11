@@ -7,24 +7,25 @@ export default class AdoptionButton extends Component{
 	static contextType=Context;
 	
 	handleButtonClick = () => {
-		if(this.props.type === 'Cat') {
+		if(this.props.type === 'cat') {
 			PetfulApiService.deleteCat();
 			this.context.deleteCat();
 		}
-		if(this.props.type === 'Dog') {
+		if(this.props.type === 'dog') {
 			PetfulApiService.deleteDog();
 			this.context.deleteDog();
 		}
-		this.context.setIsInLine(false);
+		this.context.deleteUserFromQueue(this.context.user);
+		this.context.setUser({name:null});
+		clearInterval(this.context.queueIntervalState);
 		window.alert("Congrats! You've adopted this pet!");
 	}
 	
 	render(){
 		const {error}=this.context;
+		let rando=()=>{Math.floor(Math.random() * Math.floor(2));};
 		return (
-			<>
-				<input type='button' onClick={this.handleButtonClick} value='Adopt'/>
-			</>
+			<input key={rando} type='button' onClick={this.handleButtonClick} value='Adopt'/>
 		)
 	}
 }

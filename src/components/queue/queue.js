@@ -8,7 +8,7 @@ export default class Queue extends Component {
 	render(){
 		return(
 			<div id='queue-container'>
-				{this.context.people.map(person=>{return(<div>{person}</div>)})}
+				{this.context.people.map((person,idx)=>{return(<div key={idx}>{person}</div>)})}
 			</div>
 		);
 	}

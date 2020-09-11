@@ -20,7 +20,6 @@ export default class Pet extends Component{
 		const {error}=this.context;
 		if(this.props.type==='cat'){
 			if(this.context.cats!==undefined&&this.context.cats.length>0){
-				console.log(this.context.cats)
 				age = this.context.cats[0].age;
 				breed = this.context.cats[0].breed;
 				description = this.context.cats[0].description;
@@ -43,8 +42,8 @@ export default class Pet extends Component{
 		}
 		return (
 			<>
-				<h3>{this.props.type}</h3>
-				<div><img src={imageURL} alt="cute kitty" /></div>
+				{/* <h3>{this.props.type}</h3> */}
+				<div><img className='pet-img' src={imageURL} alt="cute kitty" /></div>
 				<div><span>Name: </span><span>{name}</span></div>
 				<div><span>Gender: </span><span>{gender}</span></div>
 				<div><span>Age: </span><span>{age}</span></div>
@@ -53,7 +52,7 @@ export default class Pet extends Component{
 				<div><span>{name}'s story: </span><span>{story}</span></div>
 				{
 					this.context.user===this.context.people[0]
-						? <AdoptionButton type={this.props.type}/>
+						? <AdoptionButton key='adoptionbutton' type={this.props.type}/>
 						: <></>
 				}
 			</>

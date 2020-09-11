@@ -9,37 +9,16 @@ import './adoption.css';
 export default class AdoptionPage extends Component {
   static contextType=Context;
 
-  	updateQueue=()=>{
-		//store the user at the front of queue in a variable
-		let user=this.context.people[0];
-		//send the delete request to the api
-		PetfulApiService.deleteUser(user);
-		//send the post request to the api with the stored user
-		PetfulApiService.postUser({name:user});
-		//update context/state?
-		this.context.deleteUserFromQueue(user);
-		this.context.addUserToQueue(user);
-		//delete the head of the list either dog or cat, chosen at random
-		const petToDelete=Math.floor(Math.random()*2);
-		if(petToDelete===0){this.context.deleteDog();}
-		else{this.context.deleteCat();}
-	}
-
-	queueUpdater=()=>{
-		let queueInterval=setInterval(this.updateQueue,15000);
-	}
-	
-	componentDidMount() {
+  	componentDidMount() {
     	this.context.clearError();
-		this.queueUpdater()
+		this.context.queueInterval()
 	}
   	
 	componentWillUnmount() {
-		clearInterval(this.queueInterval);
+		clearInterval(this.context.queueIntervalState);
 	}
 
 	render(){
-		console.log(this.context.user)
 		const {error}=this.context;
 		return(
 			<section id='adoption-section'>
@@ -50,15 +29,13 @@ export default class AdoptionPage extends Component {
 
 				<h3>Here are the pets for adoption</h3>
 
-				<Pet type='cat'/>
-				<Pet type='dog'/>
+				<Pet key='cat' type='cat'/>
+				<Pet key='dog' type='dog'/>
 				{
 					this.context.user===null
-						?<RegistrationForm/>
+						?<RegistrationForm key='regForm'/>
 						:<></>
 				}
-				
-
 			</section>
 		);
 	}
