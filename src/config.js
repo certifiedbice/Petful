@@ -1,3 +1,3 @@
 export default{
- 	API_ENDPOINT: 'http://localhost:8000/api'
+ 	API_ENDPOINT: 'https://infinite-chamber-93667.herokuapp.com/api'
 };
